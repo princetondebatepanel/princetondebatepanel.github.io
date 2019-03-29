@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Princeton's Adlai Tournament, 2017">
+    <meta name="author" content="Bharath Srivatsan, Andrew Hartnett, Yijia Liang">
+
+    <title>Adlai 2018: Rounds</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="less/grayscale.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,900' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <div class="container" style="text-align:center;">
+        <a href="index.html" id="home" class="btn btn-circle page-scroll" style="padding-left:12px; margin-left:0;">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                        </a>
+        <div class="row" id="motion_info">
+        <!-- Next round at -->
+            <h1>Hard Drop at 4</h1>
+        </div>
+        <div class="row" id="motion_motion">
+            <!-- <h1>Info</h1>
+            <p>
+            
+            </p>
+            <h1>Motion</h1>
+            <p class="motion-text">
+            
+            </p>
+            --> 
+            <a id="motion_check" onclick="ckMotions()" class="btn btn-default btn-lg">Check for Motion</a>
+        </div>
+        <div class="row" id="motion_pairings">
+            <a href="http://princeton.nu-tab.com/pairings/pairinglist/" id="motion_check" class="btn btn-default btn-lg" target="_blank">
+                Pairings
+            </a>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Princeton Debate Panel 2018.
+            <br />Designed by Bharath Srivatsan '18, Andrew Hartnett '18, Yijia Liang '19, Stephen Cornwell '20</p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+    
+    <!-- Motion Check JS -->
+    <script type"text/javascript">
+        var ckMotions = function() {
+            //!!!!!!
+            var nextHour = 16;
+            var nextMin = 30;
+            var totalTime = 1200;
+            var date = new Date();
+            var motion = new Date(2016, 03, 30, nextHour, nextMin, 00, 00);
+//            console.log(date);
+//            console.log(motion);
+            if (motion <= date) {
+                location.reload();
+            }
+            else {
+                // change to hourglass in button
+                $("#motion_check")
+                    .html("<div id='motion_check_content'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span></div>");
+                //animate hourglass
+                $("#motion_check_content")
+                    .delay(500)
+                    .queue(function(next) {
+                        $(this).css({
+                            //for firefox
+                            "-moz-animation-name":"rotatebox",
+                            "-moz-animation-duration":"0.8s",
+                            "-moz-animation-iteration-count":"1",
+                                "-moz-animation-fill-mode":"forwards",
+
+                            //for safari & chrome
+                            "-webkit-animation-name":"rotatebox",
+                            "-webkit-animation-duration":"0.8s",
+                            "-webkit-animation-iteration-count":"1",
+                            "-webkit-animation-fill-mode" : "forwards",
+                        });
+                        next();  
+                    });
+                // restore button
+                $("#motion_check")
+                    .delay(totalTime)
+                    .queue(function(next) {
+                        $(this).html("Check for Motion");
+                        next();
+                    });
+                
+                
+                // animate pulse in info heading
+                // NOTE THAT THIS TIME IS CONCURRENT WITH ABOVE
+                $("#motion_info")
+                    .delay(totalTime)
+                    .animate({
+                        'font-size':'120%'
+                        }, 
+                        250,
+                        function() {
+                            $("#motion_info").animate({
+                                'font-size':'100%'
+                            }, 
+                            250, function(){});
+                });
+            }
+        }
+    </script>
+
+</body>
+
+</html>
